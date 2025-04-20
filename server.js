@@ -1,67 +1,45 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
-const connection = require('./db'); // Your connection module
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const connection = require('./db');
 
-const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
+const app = express();
 
-  // Serve the static HTML file (the visual part)
-  if (req.method === 'GET' && parsedUrl.pathname === '/') {
-    fs.readFile('index.html', (err, data) => {
-      if (err) {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        return res.end("Error loading the page");
-      }
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(data);
-    });
-  
-  // Endpoint to get the list of tasks
-  } else if (req.method === 'GET' && parsedUrl.pathname === '/tasks') {
-    connection.query('SELECT * FROM tasks', (err, results) => {
-      if (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Database error' }));
-      }
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(results));
-    });
-  
-  // Endpoint to add a new task
-  } else if (req.method === 'POST' && parsedUrl.pathname === '/tasks') {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk;
-    });
-    req.on('end', () => {
-      try {
-        const task = JSON.parse(body);
-        connection.query(
-          'INSERT INTO tasks (title, description) VALUES (?, ?)',
-          [task.title, task.description],
-          (err, result) => {
-            if (err) {
-              res.writeHead(500, { 'Content-Type': 'application/json' });
-              return res.end(JSON.stringify({ error: 'Database error inserting task' }));
-            }
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ id: result.insertId, title: task.title, description: task.description }));
-          }
-        );
-      } catch (error) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Invalid JSON' }));
-      }
-    });
-  
-  // Not Found
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end("Not Found");
-  }
+// Enable CORS and JSON parsing middleware
+app.use(cors());
+app.use(express.json());
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// GET /tasks endpoint to fetch all tasks
+app.get('/tasks', (req, res) => {
+  connection.query('SELECT * FROM tasks', (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.json(results);
+  });
 });
 
-server.listen(3000, () => {
+// POST /tasks endpoint to add a new task
+app.post('/tasks', (req, res) => {
+  const { title, description } = req.body;
+  connection.query(
+    'INSERT INTO tasks (title, description) VALUES (?, ?)',
+    [title, description],
+    (err, result) => {
+      if (err) {
+        console.error('Database insertion error:', err);
+        return res.status(500).json({ error: 'Database error inserting task' });
+      }
+      res.status(201).json({ id: result.insertId, title, description });
+    }
+  );
+});
+
+// Start the server on port 3000
+app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });
