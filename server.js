@@ -1,12 +1,12 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const connection = require('./db'); 
+const connection = require('./db'); // Your connection module
 
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
 
- 
+  // Serve the static HTML file (the visual part)
   if (req.method === 'GET' && parsedUrl.pathname === '/') {
     fs.readFile('index.html', (err, data) => {
       if (err) {
@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
       res.end(data);
     });
   
- 
+  // Endpoint to get the list of tasks
   } else if (req.method === 'GET' && parsedUrl.pathname === '/tasks') {
     connection.query('SELECT * FROM tasks', (err, results) => {
       if (err) {
@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify(results));
     });
   
- 
+  // Endpoint to add a new task
   } else if (req.method === 'POST' && parsedUrl.pathname === '/tasks') {
     let body = '';
     req.on('data', chunk => {
@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
       }
     });
   
- 
+  // Not Found
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end("Not Found");
