@@ -9,43 +9,120 @@
 <body class="anotacoes-html">
     <h1>Nesse site, irei anotar tudo que faço, criarei listas de tarefas e o que me der vontade</h1>
     <div id="wrapper">
- 
-         <!--area container-->
-         <div id="container-lista">
-             <h2>Commits por tipo de alteração</h2>
-             <ul id="lista">
-                 <li>
-                 <strong>feat:</strong> Adição de uma nova funcionalidade.
-                  <br><br><strong>Exemplo:</strong> feat: implementar sistema de login
-                 </li><br>
-                 <li>
-                 <strong>fix:</strong> Correção de bugs ou problemas existentes.
-                  <br><br><strong>Exemplo:</strong> fix: corrigir erro de autenticação
-                 </li><br>
-                 <li>
-                 <strong>refactor:</strong> Alterações no código que não modificam o comportamento, mas melhoram a estrutura ou legibilidade.
-                     <br><br><strong>Exemplo:</strong> refactor: reorganizar lógica de autenticação
-                 </li><br>
-                 <li>
-                     <strong>style:</strong> Alterações relacionadas à formatação, como indentação ou remoção de espaços, sem impacto funcional.
-                     <br><br><strong>Exemplo:</strong> style: ajustar espaçamento em arquivo HTML
-                 </li><br>
-               <li>
-                   <strong>test:</strong> Adição ou alteração de testes automatizados.
-                     <br><br><strong>Exemplo:</strong> test: criar testes para função de login
-               </li><br>
-               <li>
-                   <strong>docs:</strong> Alterações na documentação.
-                     <br><br><strong>Exemplo:</strong> docs: atualizar instruções no README.md
-               </li><br>
-               <li>
-                   <strong>chore:</strong> Tarefas de manutenção, como atualização de dependências ou configurações.
-                   <br><br><strong>Exemplo:</strong> chore: atualizar versão do Node.js
-               </li>
-             </ul>
-         </div>
+        <!--area container-->
+        <div id="container-lista"></div>
+            <h2>Commits por tipo de alteração</h2>
+            <ul id="lista"></ul>
+                <li>
+                    <strong>git init</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    Inicia um novo projeto com git
+                </li><br>
+                <li>
+                    <strong>git add <!--<nome-do-arquivo>--></strong><br>
+                    <strong>Exemplo:</strong><br>
+                    add os arquivos que estão prontos para serem commitados
+                </li><br>
+                <li>
+                    <strong>git commit -m <!--"mensagem de commit"--></strong><br>
+                    <strong>Exemplo:</strong><br>
+                    commit os arquivos do histórico
+                </li><br>
+                <li>
+                    <strong>git log</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    mostra os últimos commits realizados
+                </li><br>
+                <li>
+                    <strong>git status</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    mostra como está o status da nossa ramificação
+                </li><br>
+                <li>
+                    <strong>git diff</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    mostra o que foi alterado / o que tem de alteração na ramificação
+                </li><br>
+                <li>
+                    <strong>git merge</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    merge de ramificações, mescla as alterações de uma ramificação na outra
+                </li><br>
+                <li>
+                    <strong>git checkout <!--<nome-da-branch>--></strong><br>
+                    <strong>Exemplo:</strong><br>
+                    muda para essa branch
+                </li><br>
+                <li>
+                    <strong>git branch -b <!--nome-da-branch--></strong><br>
+                    <strong>Exemplo:</strong><br>
+                    muda para essa branch e cria uma nova branch a partir da atual que estamos
+                </li><br>
+                <li>
+                    <strong>git remote add <!--<nome> <url>--></strong><br>
+                    <strong>Exemplo:</strong><br>
+                    adiciona um repositório remoto, ou seja, adiciona um repositório que está hospedado em outro lugar (GitHub, GitLab, etc.)
+                </li><br>
+                <li>
+                    <strong>git push</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    manda as nossas alterações para o repositório remoto
+                </li><br>
+                <li>
+                    <strong>git pull</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    pega as alterações do repositório remoto e traz para o nosso repositório local
+                </li><br>
+                <li>
+                    <strong>git fecth</strong><br>
+                    <strong>Exemplo:</strong><br>
+                    atualiza o novo histórico do repositório remoto, mas não faz o merge com o nosso repositório local
+                </li><br>
+                <li>
+                    <strong>feat:</strong><br>
+                    Adição de uma nova funcionalidade.
+                    <strong>Exemplo:</strong><br>
+                    feat: implementar sistema de login
+                </li><br>
+                <li>
+                    <strong>fix:</strong><br>
+                    Correção de bugs ou problemas existentes.
+                    <strong>Exemplo:</strong><br>
+                    fix: corrigir erro de autenticação
+                </li><br>
+                <li>
+                    <strong>refactor:</strong><br>
+                    Alterações no código que não modificam o comportamento, mas melhoram a estrutura ou legibilidade.
+                    <strong>Exemplo:</strong><br>
+                    refactor: reorganizar lógica de autenticação
+                </li><br>
+                <li>
+                    <strong>style:</strong><br>
+                    Alterações relacionadas à formatação, como indentação ou remoção de espaços, sem impacto funcional.
+                    <strong>Exemplo:</strong><br>
+                    style: ajustar espaçamento em arquivo HTML
+                </li><br>
+                <li>
+                    <strong>test:</strong><br>
+                    Adição ou alteração de testes automatizados.
+                    <strong>Exemplo:</strong><br>
+                    test: criar testes para função de login
+                </li><br>
+                <li>
+                    <strong>docs:</strong><br>
+                    Alterações na documentação.
+                    <strong>Exemplo:</strong><br>
+                    docs: atualizar instruções no README.md
+                </li><br>
+                <li>
+                    <strong>chore:</strong><br>
+                    Tarefas de manutenção, como atualização de dependências ou configurações.
+                    <strong>Exemplo:</strong><br>
+                    chore: atualizar versão do Node.js
+                </li><br>
+            </ul>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
